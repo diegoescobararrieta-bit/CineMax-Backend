@@ -46,6 +46,11 @@ public class ManejadorExcepciones {
         return respuesta(HttpStatus.BAD_REQUEST, "Datos faltantes o con formato incorrecto.");
     }
 
+        @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Map<String, Object>> argumentoInvalido(IllegalArgumentException e) {
+        return respuesta(HttpStatus.BAD_REQUEST, e.getMessage());
+    }
+
     private ResponseEntity<Map<String, Object>> respuesta(HttpStatus estado, String mensaje) {
         Map<String, Object> cuerpo = new LinkedHashMap<>();
         cuerpo.put("status", estado.value());
