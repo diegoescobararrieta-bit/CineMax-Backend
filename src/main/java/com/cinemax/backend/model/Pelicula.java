@@ -1,6 +1,10 @@
 package com.cinemax.backend.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
 import java.time.LocalDate;
 
 @Entity
@@ -11,18 +15,23 @@ public class Pelicula {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     @Column(name = "titulo", nullable = false)
     private String titulo;
 
     @Column(name = "titulo_original")
     private String tituloOriginal;
 
+    @NotBlank
     @Column(name = "genero", nullable = false)
     private String genero;
 
+    @NotNull
+    @Positive
     @Column(name = "duracion_min", nullable = false)
     private Integer duracionMin;
 
+    @NotBlank
     @Column(name = "clasificacion", nullable = false)
     private String clasificacion;
 
@@ -41,6 +50,7 @@ public class Pelicula {
     @Column(name = "fecha_estreno")
     private LocalDate fechaEstreno;
 
+    @Pattern(regexp = "EN_CARTELERA|PREVENTA|PROXIMAMENTE")
     @Column(name = "estado", nullable = false)
     private String estado = "EN_CARTELERA";
 
